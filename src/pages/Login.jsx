@@ -1,5 +1,3 @@
-
-
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../features/authSlice';
@@ -11,7 +9,11 @@ function Login() {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    const mockUser = { id: 1, name: 'Gayatri', email };
+    const mockUser = {
+      id: 1,
+      name: email ? email.split('@')[0] : 'User', // dynamic name from email
+      email,
+    };
     dispatch(login(mockUser));
     navigate('/checkout');
   };

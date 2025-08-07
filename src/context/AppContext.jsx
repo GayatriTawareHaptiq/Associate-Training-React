@@ -1,14 +1,11 @@
-
-
 import React, { createContext, useContext, useState } from 'react';
 
 const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
-  const [wishlist, setWishlist] = useState([]);
+  const [wishList, setWishList] = useState([]);
 
-  // Add to Cart
   const addToCart = (book) => {
     setCart((prevCart) => {
       const exists = prevCart.find((item) => item.key === book.key);
@@ -20,27 +17,26 @@ export const AppContextProvider = ({ children }) => {
     setCart((prevCart) => prevCart.filter((item) => item.key !== key));
   };
 
-  // Add to Wishlist
-  const addToWishlist = (book) => {
-    setWishlist((prevWishlist) => {
-      const exists = prevWishlist.find((item) => item.key === book.key);
-      return exists ? prevWishlist : [...prevWishlist, book];
+  const addToWishList = (book) => {
+    setWishList((prevWishList) => {
+      const exists = prevWishList.find((item) => item.key === book.key);
+      return exists ? prevWishList : [...prevWishList, book];
     });
   };
 
-  const removeFromWishlist = (key) => {
-    setWishlist((prevWishlist) => prevWishlist.filter((item) => item.key !== key));
+  const removeFromWishList = (key) => {
+    setWishList((prevWishList) => prevWishList.filter((item) => item.key !== key));
   };
 
   return (
     <AppContext.Provider
       value={{
         cart,
-        wishlist,
+        wishList,
         addToCart,
         removeFromCart,
-        addToWishlist,
-        removeFromWishlist,
+        addToWishList,
+        removeFromWishList,
       }}
     >
       {children}
@@ -56,4 +52,8 @@ export const useAppContext = () => {
   return context;
 };
 
-export default AppContextProvider;
+export {
+  AppContextProvider,
+  useAppContext,
+};
+export default AppContext;
