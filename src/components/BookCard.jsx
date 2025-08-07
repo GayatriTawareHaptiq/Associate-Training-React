@@ -1,10 +1,8 @@
-
-
 import React from 'react';
 import { useAppContext } from '../context/AppContext'; 
 
 function BookCard({ book }) {
-  const { addToCart, addToWishlist } = useAppContext(); 
+  const { addToCart, addToWishList } = useAppContext(); 
 
   return (
     <div className="book-card">
@@ -21,7 +19,7 @@ function BookCard({ book }) {
         <button className="book-btn" onClick={() => addToCart(book)}>
           Add to Cart
         </button>
-        <button className="book-btn" onClick={() => addToWishlist(book)}>
+        <button className="book-btn" onClick={() => addToWishList(book)}>
           Add to Wishlist
         </button>
       </div>

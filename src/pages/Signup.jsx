@@ -1,5 +1,3 @@
-// src/pages/Signup.jsx
-
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../features/authSlice';
@@ -12,8 +10,15 @@ function Signup() {
   const navigate = useNavigate();
 
   const handleSignup = () => {
-    const newUser = { id: Date.now(), name, email };
-    dispatch(login(newUser)); // Log in after signup
+    if (!email.trim() || !name.trim()) return; // ✅ prevent empty signup
+
+    const newUser = {
+      id: Date.now(),
+      name,
+      email,
+    };
+
+    dispatch(login(newUser)); // ✅ auto-login after signup
     navigate('/checkout');
   };
 
@@ -25,12 +30,14 @@ function Signup() {
         placeholder="Name"
         value={name}
         onChange={e => setName(e.target.value)}
+        required
       />
       <input
         type="email"
         placeholder="Email"
         value={email}
         onChange={e => setEmail(e.target.value)}
+        required
       />
       <button className="book-btn" onClick={handleSignup}>Sign Up</button>
       <p>

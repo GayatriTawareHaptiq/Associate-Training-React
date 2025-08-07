@@ -9,11 +9,14 @@ function Login() {
   const navigate = useNavigate();
 
   const handleLogin = () => {
+    if (!email.trim()) return; // ✅ prevent empty login
+
     const mockUser = {
       id: 1,
-      name: email ? email.split('@')[0] : 'User', // dynamic name from email
+      name: email.split('@')[0], // ✅ simplified fallback logic
       email,
     };
+
     dispatch(login(mockUser));
     navigate('/checkout');
   };
@@ -26,6 +29,7 @@ function Login() {
         placeholder="Email"
         value={email}
         onChange={e => setEmail(e.target.value)}
+        required
       />
       <button className="book-btn" onClick={handleLogin}>Login</button>
       <p>

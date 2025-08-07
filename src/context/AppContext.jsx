@@ -7,10 +7,11 @@ export const AppContextProvider = ({ children }) => {
   const [wishList, setWishList] = useState([]);
 
   const addToCart = (book) => {
-    setCart((prevCart) => {
-      const exists = prevCart.find((item) => item.key === book.key);
-      return exists ? prevCart : [...prevCart, book];
-    });
+    setCart((prevCart) =>
+      prevCart.some((item) => item.key === book.key)
+        ? prevCart
+        : [...prevCart, book]
+    );
   };
 
   const removeFromCart = (key) => {
@@ -18,14 +19,17 @@ export const AppContextProvider = ({ children }) => {
   };
 
   const addToWishList = (book) => {
-    setWishList((prevWishList) => {
-      const exists = prevWishList.find((item) => item.key === book.key);
-      return exists ? prevWishList : [...prevWishList, book];
-    });
+    setWishList((prevWishList) =>
+      prevWishList.some((item) => item.key === book.key)
+        ? prevWishList
+        : [...prevWishList, book]
+    );
   };
 
   const removeFromWishList = (key) => {
-    setWishList((prevWishList) => prevWishList.filter((item) => item.key !== key));
+    setWishList((prevWishList) =>
+      prevWishList.filter((item) => item.key !== key)
+    );
   };
 
   return (
@@ -51,9 +55,4 @@ export const useAppContext = () => {
   }
   return context;
 };
-
-export {
-  AppContextProvider,
-  useAppContext,
-};
-export default AppContext;
+export default AppContextProvider;
