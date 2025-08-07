@@ -1,4 +1,4 @@
-// src/pages/Products.jsx
+
 
 import React, { useEffect, useState } from 'react';
 import { fetchBooks } from '../api/books';
@@ -10,19 +10,35 @@ function Products() {
   const [books, setBooks] = useState([]);
   const [query, setQuery] = useState('');
   const [categoryQuery, setCategoryQuery] = useState('');
-  const { addToCart, addToWishlist } = useAppContext();
+  const [loading, setLoading] = useState(false);
+
+  const { addToCart, addToWishList } = useAppContext(); 
 
   useEffect(() => {
-    const params = {};
-    if (query) {
-      params.query = query;
-    } else if (categoryQuery) {
-      params.category = categoryQuery;
-    } else {
-      params.category = 'fiction'; // default
-    }
+    const fetchData = async () => {
+      setLoading(true);
+      const params = {};
 
-    fetchBooks(params).then(setBooks);
+      if (query) {
+        params.query = query;
+      } else if (categoryQuery) {
+        params.category = categoryQuery;
+      } else {
+        params.category = 'fiction'; 
+      }
+
+      try {
+        const data = await fetchBooks(params);
+        setBooks(data);
+      } catch (error) {
+        console.error('Error fetching books:', error);
+        setBooks([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, [query, categoryQuery]);
 
   return (
@@ -57,14 +73,20 @@ function Products() {
       </div>
 
       <div className="book-grid">
-        {books.map((book) => (
-          <BookCard
-            key={book.key}
-            book={book}
-            onAddToCart={addToCart}
-            onAddToWishlist={addToWishlist}
-          />
-        ))}
+        {loading ? (
+          <p>Loading books...</p>
+        ) : books.length > 0 ? (
+          books.map((book) => (
+            <BookCard
+              key={book.key}
+              book={book}
+              onAddToCart={addToCart}
+              onAddToWishlist={addToWishList}
+            />
+          ))
+        ) : (
+          <p>No books found.</p>
+        )}
       </div>
     </div>
   );
