@@ -1,10 +1,10 @@
-
-
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { fetchBooks } from '../api/books';
 import { categories } from '../api/categories';
 import BookCard from '../components/BookCard';
-import { useAppContext } from '../context/AppContext';
+import { addToCart } from '../features/cartSlice'; // ✅ correct path
+import { addToWishlist } from '../features/wishlistSlice'; // ✅ correct name and path
 
 function Products() {
   const [books, setBooks] = useState([]);
@@ -12,7 +12,7 @@ function Products() {
   const [categoryQuery, setCategoryQuery] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const { addToCart, addToWishList } = useAppContext(); 
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,7 +24,7 @@ function Products() {
       } else if (categoryQuery) {
         params.category = categoryQuery;
       } else {
-        params.category = 'fiction'; 
+        params.category = 'fiction';
       }
 
       try {
@@ -40,6 +40,14 @@ function Products() {
 
     fetchData();
   }, [query, categoryQuery]);
+
+  const handleAddToCart = (book) => {
+    dispatch(addToCart(book));
+  };
+
+  const handleAddToWishList = (book) => {
+    dispatch(addToWishlist(book)); // ✅ fixed function name
+  };
 
   return (
     <div className="container">
@@ -80,8 +88,8 @@ function Products() {
             <BookCard
               key={book.key}
               book={book}
-              onAddToCart={addToCart}
-              onAddToWishlist={addToWishList}
+              onAddToCart={() => handleAddToCart(book)}
+              onAddToWishlist={() => handleAddToWishList(book)}
             />
           ))
         ) : (

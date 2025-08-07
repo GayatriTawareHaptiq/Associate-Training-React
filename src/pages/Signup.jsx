@@ -1,48 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { login } from '../features/authSlice';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { login } from '../features/authSlice'; 
 
 function Signup() {
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSignup = () => {
-    if (!email.trim() || !name.trim()) return; // ✅ prevent empty signup
-
     const newUser = {
-      id: Date.now(),
-      name,
-      email,
+      id: 2,
+      name: 'New User',
+      email: 'newuser@example.com',
     };
 
-    dispatch(login(newUser)); // ✅ auto-login after signup
-    navigate('/checkout');
+    
+    dispatch(login(newUser));
+
+    navigate('/');
   };
 
   return (
-    <div className="auth-container text-center">
-      <h2>Sign Up</h2>
-      <input
-        type="text"
-        placeholder="Name"
-        value={name}
-        onChange={e => setName(e.target.value)}
-        required
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-        required
-      />
-      <button className="book-btn" onClick={handleSignup}>Sign Up</button>
-      <p>
-        Already have an account? <Link to="/login">Login</Link>
-      </p>
+    <div>
+      <h2>Signup</h2>
+      <button onClick={handleSignup}>Create Account</button>
     </div>
   );
 }
