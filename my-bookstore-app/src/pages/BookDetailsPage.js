@@ -2,6 +2,8 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import DOMPurify from 'dompurify';
 import { clearSelectedBook } from '../features/booksSlice';
+import { addToCart } from '../features/cartSlice';
+import { addToWishlist } from '../features/wishlistSlice'; // Assuming you have this slice
 
 const BookDetailsPage = () => {
     const dispatch = useDispatch();
@@ -41,10 +43,16 @@ const BookDetailsPage = () => {
                         />
 
                         <div className="mt-8 flex gap-4">
-                            <button className="flex-1 bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors">
+                            <button 
+                                className="flex-1 bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors"
+                                onClick={() => dispatch(addToCart(book))}
+                            >
                                 Add to Cart
                             </button>
-                            <button className="flex-1 bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-lg hover:bg-gray-300 transition-colors">
+                            <button 
+                                className="flex-1 bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-lg hover:bg-gray-300 transition-colors"
+                                onClick={() => dispatch(addToWishlist(book))}
+                            >
                                 Add to Wishlist
                             </button>
                         </div>
