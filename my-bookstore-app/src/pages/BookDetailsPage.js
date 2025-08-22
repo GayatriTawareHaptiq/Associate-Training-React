@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import DOMPurify from 'dompurify';
 import { clearSelectedBook } from '../features/booksSlice';
 import { addToCart } from '../features/cartSlice';
-import { addToWishlist } from '../features/wishlistSlice'; // Assuming you have this slice
+import { addToWishlist } from '../features/wishlistSlice'; 
 
 const BookDetailsPage = () => {
     const dispatch = useDispatch();
