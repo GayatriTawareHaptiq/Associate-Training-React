@@ -11,7 +11,6 @@ const CartPage = () => {
     const cartItems = useSelector((state) => state.cart.items);
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
-
     const handleCheckout = () => {
         if (isLoggedIn) {
             toast.success('Proceeding to checkout!', {
@@ -58,7 +57,8 @@ const CartPage = () => {
                             <p className="text-base font-bold mb-3">Price: ₹{item.price}</p>
                             <button
                                 onClick={() => handleRemove(item.id)}
-                                className="bg-red-500 text-black px-3 py-1 rounded hover:bg-red-600"
+                                className="bg-black text-white px-4 py-2"
+
                             >
                                 Remove
                             </button>
@@ -70,7 +70,8 @@ const CartPage = () => {
             {cartItems.length > 0 && (
                 <button
                     onClick={handleCheckout}
-                    className="mt-8 bg-blue-600 text-black px-6 py-2 rounded hover:bg-blue-700"
+                    className="bg-black text-white px-4 py-2"
+
                 >
                     Checkout
                 </button>
