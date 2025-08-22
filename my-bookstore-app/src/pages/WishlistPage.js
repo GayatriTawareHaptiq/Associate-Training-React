@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Container, Row, Col, Image, Button } from 'react-bootstrap';
 import { removeFromWishlist } from '../features/wishlistSlice';
 import { addToCart } from '../features/cartSlice';
 
@@ -10,32 +11,65 @@ const WishlistPage = () => {
 
     const handleAddToCart = (book) => {
         dispatch(addToCart(book));
-        dispatch(removeFromWishlist(book)); 
+        dispatch(removeFromWishlist(book));
     };
 
     return (
-        <div className="max-w-4xl mx-auto py-8 px-4">
-            <h1 className="text-3xl font-bold mb-6">Your Wishlist</h1>
+        <Container className="py-5">
+            <h1 className="mb-4" style={{ fontWeight: 'bold', fontSize: '2rem' }}>Your Wishlist</h1>
             {wishlistItems.length === 0 ? (
-                <p>Your wishlist is empty. <Link to="/books" className="text-blue-600">Find some books</Link></p>
+                <p>
+                    Your wishlist is empty.{' '}
+                    <Link to="/books" style={{ color: '#0d6efd' }}>Find some books</Link>
+                </p>
             ) : (
-                <div className="space-y-4">
+                <Row className="gy-4">
                     {wishlistItems.map(item => (
-                        <div key={item.id} className="flex items-center justify-between bg-white p-4 rounded-lg shadow">
-                            <img src={item.coverImage} alt={item.title} className="w-16 h-24 object-cover rounded"/>
-                            <div className="flex-grow ml-4">
-                                <h2 className="font-bold">{item.title}</h2>
-                                <p className="text-sm text-gray-600">{item.authors?.[0]}</p>
-                            </div>
-                            <div className="flex items-center gap-4">
-                                <button onClick={() => handleAddToCart(item)} className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600">Add to Cart</button>
-                                <button onClick={() => dispatch(removeFromWishlist(item))} className="text-red-500 hover:text-red-700">Remove</button>
-                            </div>
-                        </div>
+                        <Col key={item.id} xs={12}>
+                            <Row className="align-items-center bg-white p-3 rounded shadow-sm">
+                                <Col xs="auto">
+                                    <Image
+                                        src={item.coverImage}
+                                        alt={item.title}
+                                        style={{
+                                            width: '64px',
+                                            height: '96px',
+                                            objectFit: 'cover',
+                                            borderRadius: '0.25rem'
+                                        }}
+                                    />
+                                </Col>
+                                <Col>
+                                    <h2 style={{ fontWeight: 'bold', fontSize: '1.25rem', marginBottom: '0.25rem' }}>
+                                        {item.title}
+                                    </h2>
+                                    <p className="text-muted mb-0" style={{ fontSize: '0.9rem' }}>
+                                        {item.authors?.[0]}
+                                    </p>
+                                </Col>
+                                <Col xs="auto">
+                                    <Button
+                                        variant="primary"
+                                        size="sm"
+                                        onClick={() => handleAddToCart(item)}
+                                        className="me-2"
+                                    >
+                                        Add to Cart
+                                    </Button>
+                                    <Button
+                                        variant="outline-danger"
+                                        size="sm"
+                                        onClick={() => dispatch(removeFromWishlist(item))}
+                                    >
+                                        Remove
+                                    </Button>
+                                </Col>
+                            </Row>
+                        </Col>
                     ))}
-                </div>
+                </Row>
             )}
-        </div>
+        </Container>
     );
 };
 
