@@ -1,6 +1,7 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -13,27 +14,23 @@ import CartPage from './pages/CartPage';
 import WishlistPage from './pages/WishlistPage';
 
 const App = () => {
-    const { selectedBook } = useSelector((state) => state.books);
-
     return (
         <Router>
             <div className="bg-gray-50 min-h-screen flex flex-col">
                 <Navbar />
                 <main className="flex-grow">
-                    {selectedBook ? (
-                        <BookDetailsPage />
-                    ) : (
-                        <Routes>
-                            <Route path="/" element={<HomePage />} />
-                            <Route path="/books" element={<BooksPage />} />
-                            <Route path="/cart" element={<CartPage />} />
-                            <Route path="/wishlist" element={<WishlistPage />} />
-                            <Route path="/login" element={<LoginPage />} />
-                            <Route path="/signup" element={<SignupPage />} />
-                        </Routes>
-                    )}
+                    <Routes>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/books" element={<BooksPage />} />
+                        <Route path="/books/:id" element={<BookDetailsPage />} />
+                        <Route path="/cart" element={<CartPage />} />
+                        <Route path="/wishlist" element={<WishlistPage />} />
+                        <Route path="/login" element={<LoginPage />} />
+                        <Route path="/signup" element={<SignupPage />} />
+                    </Routes>
                 </main>
                 <Footer />
+                <ToastContainer />
             </div>
         </Router>
     );
