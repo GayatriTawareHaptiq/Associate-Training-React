@@ -20,7 +20,7 @@ const BookCard = ({ book }) => {
                 <Card.Img variant="top" src={book.coverImage} style={{ height: '250px', objectFit: 'cover' }} />
                 <Card.Body>
                     <Card.Title className="text-truncate">{book.title}</Card.Title>
-                    <Card.Text className="text-muted">{book.authors[0]}</Card.Text>
+                    <Card.Text className="text-muted">{book.authors?.[0]}</Card.Text>
                 </Card.Body>
             </div>
             <Card.Footer className="d-flex justify-content-between bg-white border-0 p-2">
