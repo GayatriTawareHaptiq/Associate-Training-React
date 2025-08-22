@@ -71,7 +71,8 @@ const CartPage = () => {
             {cartItems.length > 0 && (
                 <button
                     onClick={handleCheckout}
-                    className="bg-black text-white px-4 py-2"
+                    className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-black transition-colors"
+
 
                 >
                     Checkout
