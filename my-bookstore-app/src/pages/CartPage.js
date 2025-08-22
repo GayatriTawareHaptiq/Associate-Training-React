@@ -69,7 +69,7 @@ const CartPage = () => {
             {cartItems.length > 0 && (
                 <button
                     onClick={handleCheckout}
-                    className="mt-8 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
+                    className="mt-8 bg-blue-600 text-black px-6 py-2 rounded hover:bg-blue-700"
                 >
                     Checkout
                 </button>
