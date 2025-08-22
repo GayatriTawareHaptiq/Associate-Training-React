@@ -43,11 +43,11 @@ const CartPage = () => {
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {cartItems.map((item) => (
-                        <div key={item.id} className="bg-white shadow-md rounded p-4">
+                        <div key={item.id} className="bg-white shadow-md rounded hover:bg-gray-800 transition duration-200 ">
                             <img
                                 src={item.coverImage}
                                 alt={item.title}
-                                className="w-full h-48 object-cover mb-4 rounded"
+                                className="w-full h-48 object-cover mb-4  rounded hover:bg-gray-800 transition duration-200"
                             />
                             <h2 className="text-lg font-semibold">{item.title}</h2>
                             <p className="text-sm text-gray-700 mb-1">Author: {Array.isArray(item.authors) ? item.authors.join(', ') : 'Unknown'}</p>
@@ -58,7 +58,7 @@ const CartPage = () => {
                             <p className="text-base font-bold mb-3">Price: ₹{item.price}</p>
                             <button
                                 onClick={() => handleRemove(item.id)}
-                                className="bg-black text-white px-4 py-2"
+                                className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-black transition-colors"
 
                             >
                                 Remove
