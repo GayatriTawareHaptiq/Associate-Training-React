@@ -9,7 +9,8 @@ const CartPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const cartItems = useSelector((state) => state.cart.items);
-    const isLoggedIn = true;
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
 
     const handleCheckout = () => {
         if (isLoggedIn) {
