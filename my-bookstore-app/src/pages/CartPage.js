@@ -50,7 +50,8 @@ const CartPage = () => {
                                 className="w-full h-48 object-cover mb-4 rounded"
                             />
                             <h2 className="text-lg font-semibold">{item.title}</h2>
-                            <p className="text-sm text-gray-700 mb-1">Author: {item.authors.join(', ')}</p>
+                            <p className="text-sm text-gray-700 mb-1">Author: {Array.isArray(item.authors) ? item.authors.join(', ') : 'Unknown'}</p>
+
                             <p className="text-sm mb-1">Published: {item.publishedDate}</p>
                             <p className="text-sm mb-1">Pages: {item.pageCount}</p>
                             <p className="text-sm mb-2">Quantity: {item.quantity}</p>
