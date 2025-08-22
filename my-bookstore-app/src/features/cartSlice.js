@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { calculateBookPrice } from './calculateBookPrice'; // relative import
 
 const cartSlice = createSlice({
     name: 'cart',
     initialState: {
-        items: [], 
+        items: [],
     },
     reducers: {
         addToCart: (state, action) => {
@@ -13,8 +14,11 @@ const cartSlice = createSlice({
             if (existingItem) {
                 existingItem.quantity += 1;
             } else {
-              
-                state.items.push({ ...book, quantity: 1, price: (Math.random() * 20 + 10).toFixed(2) });
+                state.items.push({ 
+                    ...book, 
+                    quantity: 1, 
+                    price: calculateBookPrice(book) 
+                });
             }
         },
         removeFromCart: (state, action) => {
