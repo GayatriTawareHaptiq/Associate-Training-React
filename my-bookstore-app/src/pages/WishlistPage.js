@@ -25,7 +25,7 @@ const WishlistPage = () => {
                             <img src={item.coverImage} alt={item.title} className="w-16 h-24 object-cover rounded"/>
                             <div className="flex-grow ml-4">
                                 <h2 className="font-bold">{item.title}</h2>
-                                <p className="text-sm text-gray-600">{item.authors[0]}</p>
+                                <p className="text-sm text-gray-600">{item.authors?.[0]}</p>
                             </div>
                             <div className="flex items-center gap-4">
                                 <button onClick={() => handleAddToCart(item)} className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600">Add to Cart</button>
