@@ -57,7 +57,7 @@ const CartPage = () => {
                             <p className="text-base font-bold mb-3">Price: ₹{item.price}</p>
                             <button
                                 onClick={() => handleRemove(item.id)}
-                                className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                                className="bg-red-500 text-black px-3 py-1 rounded hover:bg-red-600"
                             >
                                 Remove
                             </button>
