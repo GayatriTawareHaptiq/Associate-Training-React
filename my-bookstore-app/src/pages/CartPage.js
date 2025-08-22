@@ -59,8 +59,7 @@ const CartPage = () => {
                             <button
                                 onClick={() => handleRemove(item.id)}
                                 className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-black transition-colors"
-
-                            >
+>
                                 Remove
                             </button>
                         </div>
@@ -72,8 +71,6 @@ const CartPage = () => {
                 <button
                     onClick={handleCheckout}
                     className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-black transition-colors"
-
-
                 >
                     Checkout
                 </button>

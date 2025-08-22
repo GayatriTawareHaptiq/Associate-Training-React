@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Card } from 'react-bootstrap';
@@ -8,10 +8,19 @@ const LoginPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
     const handleLogin = (e) => {
         e.preventDefault();
-        dispatch(login());
-        navigate('/');
+
+        
+        if (email && password) {
+            dispatch(login()); 
+            navigate('/');
+        } else {
+            alert('Please enter both email and password');
+        }
     };
 
     return (
@@ -22,11 +31,23 @@ const LoginPage = () => {
                     <Form onSubmit={handleLogin}>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" required />
+                            <Form.Control
+                                type="email"
+                                placeholder="Enter email"
+                                required
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
                         </Form.Group>
                         <Form.Group className="mb-4" controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" required />
+                            <Form.Control
+                                type="password"
+                                placeholder="Password"
+                                required
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
                         </Form.Group>
                         <Button className="w-100 btn-gray" type="submit">Login</Button>
                     </Form>

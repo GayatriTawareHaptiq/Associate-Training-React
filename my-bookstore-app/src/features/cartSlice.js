@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { calculateBookPrice } from './calculateBookPrice'; // relative import
+import { calculateBookPrice } from './calculateBookPrice'; 
 
 const cartSlice = createSlice({
     name: 'cart',
