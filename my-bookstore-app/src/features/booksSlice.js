@@ -1,5 +1,14 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
+/**
+ * Fetches books from the Google Books API based on query and category.
+ *
+ * @param {Object} params - Parameters for the API request.
+ * @param {string} params.query - Search term entered by the user.
+ * @param {string} [params.category] - Optional category filter.
+ * @param {Object} thunkAPI - Redux Toolkit thunk API helpers.
+ * @returns {Promise<Array<Object>>} - Array of book objects or error message.
+ */
 export const fetchBooks = createAsyncThunk(
     'books/fetchBooks',
     
