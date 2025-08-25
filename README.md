@@ -1,1 +1,0 @@
-# Associate-Training-React
