@@ -5,6 +5,14 @@ import { clearSelectedBook } from '../features/booksSlice';
 import { addToCart } from '../features/cartSlice';
 import { addToWishlist } from '../features/wishlistSlice'; 
 
+// Utility function to safely modify image URL
+const getCoverImageWithZoomZero = (url) => {
+    if (typeof url === 'string' && url.includes('zoom=1')) {
+        return url.replace('zoom=1', 'zoom=0');
+    }
+    return url || 'https://placehold.co/128x192?text=No+Cover';
+};
+
 const BookDetailsPage = () => {
     const dispatch = useDispatch();
     const { selectedBook: book } = useSelector((state) => state.books);
@@ -28,7 +36,7 @@ const BookDetailsPage = () => {
                     <div className="row g-0">
                         <div className="col-md-4">
                             <img 
-                                src={book.coverImage.replace('zoom=1', 'zoom=0')} 
+                                src={getCoverImageWithZoomZero(book.coverImage)} 
                                 alt={`Cover of ${book.title}`} 
                                 className="img-fluid h-100 object-fit-cover"
                                 style={{ objectFit: 'cover' }}
