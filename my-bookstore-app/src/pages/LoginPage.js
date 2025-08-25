@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Card } from 'react-bootstrap';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { login } from '../features/authSlice';
 
 const LoginPage = () => {
@@ -14,12 +16,19 @@ const LoginPage = () => {
     const handleLogin = (e) => {
         e.preventDefault();
 
-        
         if (email && password) {
-            dispatch(login()); 
+            dispatch(login());
             navigate('/');
         } else {
-            alert('Please enter both email and password');
+            toast.error('Please enter both email and password', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         }
     };
 
@@ -53,6 +62,7 @@ const LoginPage = () => {
                     </Form>
                 </Card.Body>
             </Card>
+            <ToastContainer />
         </Container>
     );
 };
